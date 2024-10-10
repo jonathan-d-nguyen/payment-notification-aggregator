@@ -1,0 +1,31 @@
+Connected to Gmail successfully.
+Processing email: Daud Gonzalez paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Caxious Florendo-Bourne paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Alexis Murillo paid you $6.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: David Tucker paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Vinh Tr paid you $6.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Carlos Rojas paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Antonio Rocha paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Charlee Liu Liu paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Jake Schlemper paid you $5.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: GP Pickup paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Edgar Carmona paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Vinh Tr paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: David Tucker paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Gio Gaona paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'
+Processing email: Kaylynn McCrae paid you $3.00
+Error processing email: 'NoneType' object has no attribute 'next_sibling'

@@ -1,0 +1,9 @@
+# virtual environment
+env/
+
+# secrets
+secrets/
+
+
+# vscode
+.vscode/
