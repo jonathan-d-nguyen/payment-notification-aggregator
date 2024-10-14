@@ -1,6 +1,7 @@
 import imaplib
 import email
 import os
+import re
 from email.header import decode_header
 from bs4 import BeautifulSoup, Comment
 from datetime import datetime, timedelta
@@ -13,11 +14,16 @@ load_dotenv()
 
 def extract_venmo_data(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
-    
-    actor_name = soup.find(string=lambda text: isinstance(text, Comment) and 'actor name' in text).next_sibling.strip()
-    amount = soup.find(string=lambda text: isinstance(text, Comment) and 'amount' in text).next_sibling.strip()
-    note = soup.find(string=lambda text: isinstance(text, Comment) and 'note' in text).next_sibling.strip()
-    
+
+    paid_you_html = soup.find('p', string=re.compile('paid You'))
+    amount_html = paid_you_html.next_sibling
+    note = amount_html.next_sibling
+
+    paid_you_string = paid_you_html.get_text().strip()
+    actor_name = paid_you_string.split(' paid')[0]
+    amount = amount_html.get_text()
+    note = note.get_text()
+
     return actor_name, amount, note
 
 def process_venmo_emails():

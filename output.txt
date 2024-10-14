@@ -1,3 +1,0 @@
-Connected to Gmail successfully.
-Processing email: Fwd: Jake Schlemper paid you $5.00
-Error processing email: 'NoneType' object has no attribute 'next_sibling'
