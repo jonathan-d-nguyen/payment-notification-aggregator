@@ -3,7 +3,7 @@ env/
 
 # secrets
 secrets/
+.env
 
-
-# vscode
-.vscode/
+output.txt
+result-email-source.html
