@@ -14,17 +14,48 @@ load_dotenv()
 
 def extract_venmo_data(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
-
-    paid_you_html = soup.find('p', string=re.compile('paid You'))
-    amount_html = paid_you_html.next_sibling
-    note = amount_html.next_sibling
-
-    paid_you_string = paid_you_html.get_text().strip()
-    actor_name = paid_you_string.split(' paid')[0]
-    amount = amount_html.get_text()
-    note = note.get_text()
-
-    return actor_name, amount, note
+    
+    # Look for payment information with case-insensitive pattern
+    payment_pattern = re.compile(r'(paid you|You paid)', re.IGNORECASE)
+    payment_element = soup.find(['p', 'div', 'span'], string=payment_pattern)
+    
+    if not payment_element:
+        raise ValueError("No payment information found in this email")
+    
+    payment_text = payment_element.get_text().strip()
+    
+    # Find the amount using regex
+    amount_pattern = r'\$\d+(?:,\d{3})*(?:\.\d{2})?'
+    amount_match = re.search(amount_pattern, html_content)
+    if not amount_match:
+        raise ValueError("No payment amount found")
+    amount = amount_match.group(0)
+    
+    # Determine payment direction and actor
+    if re.search(r'paid you', payment_text, re.IGNORECASE):
+        # Someone paid you
+        actor_name = payment_text.split('paid')[0].strip()
+        direction = "incoming"
+    elif re.search(r'You paid', payment_text, re.IGNORECASE):
+        # You paid someone
+        actor_name = payment_text.split('paid')[1].strip()
+        direction = "outgoing"
+    else:
+        raise ValueError("Could not determine payment direction")
+    
+    # Try to find note
+    note = "No note provided"
+    note_element = soup.find(['p', 'div', 'span'], string=re.compile(r'Note:', re.IGNORECASE))
+    if note_element:
+        note = note_element.get_text().strip()
+        note = note.replace('Note:', '').strip()
+    
+    return {
+        'actor': actor_name,
+        'amount': amount,
+        'note': note,
+        'direction': direction
+    }
 
 def process_venmo_emails():
     # Get credentials from environment variables
