@@ -1,11 +1,20 @@
-# virtual environment
-env/
-
 # secrets
 secrets/
+env/
 .env
+*.env
+credentials/
+config/secrets.py
 
 # test outputs
-test_outputs/
+sandbox/
 output.txt
 result-email-source.html
+output/*.txt
+logs/
+
+*.pem
+*.key
+__pycache__/
+*.pyc
+.DS_Store
