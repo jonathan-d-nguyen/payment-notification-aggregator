@@ -5,5 +5,7 @@ env/
 secrets/
 .env
 
+# test outputs
+test_outputs/
 output.txt
 result-email-source.html
