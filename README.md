@@ -2,22 +2,7 @@
 
 <a id="readme-top"></a>
 
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -29,14 +14,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/jonathan-d-nguyen/payment-notification-aggregator">
+  <!-- <a href="https://github.com/jonathan-d-nguyen/payment-notification-aggregator">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a> -->
 
-<h3 align="center">payment-notification-aggregator</h3>
+<h3 align="center">Soccer Payment Notification Aggregator</h3>
 
   <p align="center">
-    project_description
+    An automated system to track and verify soccer meetup payments through email notifications from Zelle/Venmo, storing payment data in DynamoDB and syncing with iOS Reminders for easy participant check-off.
     <br />
     <a href="https://github.com/jonathan-d-nguyen/payment-notification-aggregator"><strong>Explore the docs »</strong></a>
     <br />
@@ -56,7 +41,8 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
@@ -71,102 +57,108 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://www.jdnguyen.net)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://www.jdnguyen.net) -->
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `jonathan-d-nguyen`, `payment-notification-aggregator`, `twitter_handle`, `JonathanDanhNguyene`, `email_client`, `email`, `project_title`, `project_description`
+A serverless solution for automating payment tracking for soccer meetups. The system processes payment notifications from Zelle and Venmo via AWS SES, parses the information using Lambda functions, stores the data in DynamoDB, and syncs with iOS Reminders for easy participant management.
+
+### Architecture
+
+- **Email Processing**: AWS SES receives payment notifications from Zelle/Venmo
+- **Data Extraction**: Python Lambda function parses email content for payment details
+- **Data Storage**: DynamoDB stores payment records and participant information
+- **Task Management**: Integration with iOS Reminders for participant check-off
+- **Infrastructure**: Terraform for AWS resource provisioning and management
+
+### Built With
+
+- ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+- ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
+- ![DynamoDB](https://img.shields.io/badge/Amazon%20DynamoDB-4053D6?style=for-the-badge&logo=Amazon%20DynamoDB&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- python3
-- pip
-
-  ```sh
-  pip install --upgrade pip
-  ```
+- AWS Account with appropriate permissions
+- Python 3.8+
+- Terraform
+- AWS CLI configured
+- iOS device for Reminders integration
 
 ### Installation
 
-1. Get a free API Key at [https://www.jdnguyen.net](https://www.jdnguyen.net)
-2. Clone the repo
+1. Clone the repository
 
    ```sh
    git clone https://github.com/jonathan-d-nguyen/payment-notification-aggregator.git
    ```
 
-3. Install Pip packages
+2. Install Python dependencies
 
    ```sh
    pip install -r requirements.txt
    ```
 
-4. Enter your API in `.env`
-
-   ```terminal
-   GMAIL_USERNAME=your_email@gmail.com
-   GMAIL_PASSWORD=your_password
-   ```
-
-   Might need to use Application Passwords: <https://support.google.com/accounts/answer/185833>
-
-5. Change git remote url to avoid accidental pushes to base project
+3. Configure AWS credentials
 
    ```sh
-   git remote set-url origin jonathan-d-nguyen/payment-notification-aggregator
-   git remote -v # confirm the changes
+   aws configure
+   ```
+
+4. Set up environment variables in `.env`
+
+   ```
+   AWS_REGION=your_region
+   SES_EMAIL=your_ses_verified_email
+   REMINDER_LIST_ID=your_ios_reminder_list_id
+   ```
+
+5. Initialize Terraform
+   ```sh
+   cd terraform
+   terraform init
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Current functionality:
 
-_For more examples, please refer to the [Documentation](https://www.jdnguyen.net)_
+- Email parsing for Zelle/Venmo notifications via AWS SES
+- Python scripts for payment information extraction
+
+In progress:
+
+- DynamoDB integration
+- iOS Reminders sync
+- Terraform infrastructure setup
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ROADMAP -->
-
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [x] AWS SES Configuration
+- [x] Python Email Parser Development
+- [ ] DynamoDB Table Creation and Integration
+- [ ] iOS Reminders Integration
+- [ ] Terraform Infrastructure Setup
+- [ ] Monitoring and Alerting
+- [ ] User Interface for Payment Status
 
 See the [open issues](https://github.com/jonathan-d-nguyen/payment-notification-aggregator/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
-
 ## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -176,42 +168,19 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Top contributors
-
-<a href="https://github.com/jonathan-d-nguyen/payment-notification-aggregator/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=jonathan-d-nguyen/payment-notification-aggregator" alt="contrib.rocks image" />
-</a>
-
-<!-- LICENSE -->
-
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
-
 ## Contact
 
-Jonathan Nguyen - [@twitter_handle](https://twitter.com/twitter_handle) - <jonathan@jdnguyen.tech>
+Jonathan Nguyen - [@twitter_handle](https://twitter.com/twitter_handle) - jonathan@jdnguyen.tech
 
-Project Link: [https://github.com/jonathan-d-nguyen/payment-notification-aggregator](https://github.com/jonathan-d-nguyen/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- []()
-- []()
-- []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Project Link: [https://github.com/jonathan-d-nguyen/payment-notification-aggregator](https://github.com/jonathan-d-nguyen/payment-notification-aggregator)
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/jonathan-d-nguyen/payment-notification-aggregator.svg?style=for-the-badge
 [contributors-url]: https://github.com/jonathan-d-nguyen/payment-notification-aggregator/graphs/contributors
