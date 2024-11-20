@@ -21,7 +21,7 @@
 <h3 align="center">Soccer Payment Notification Aggregator</h3>
 
   <p align="center">
-    An automated system to track and verify soccer meetup payments through email notifications from Zelle/Venmo, storing payment data in DynamoDB and syncing with iOS Reminders for easy participant check-off.
+    An automated system to track and verify soccer meetup payments through email notifications from Zelle/Venmo, storing payment data in DynamoDB and syncing with iOS Reminders for easy participant check-off on Apple Watch.
     <br />
     <a href="https://github.com/jonathan-d-nguyen/payment-notification-aggregator"><strong>Explore the docs »</strong></a>
     <br />
