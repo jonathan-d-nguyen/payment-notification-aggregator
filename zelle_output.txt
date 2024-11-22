@@ -1,0 +1,71 @@
+Connected to Gmail successfully.
+
+Date: Wednesday Nov 13 @ 2143
+Received from: JOSE ESPINOZA
+Amount: $3.00
+Confirmation: 3470682879
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Wednesday Nov 13 @ 1828
+Received from: JONATHAN PORTUGUEZ
+Amount: $3.00
+Confirmation: 3470411517
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Wednesday Nov 13 @ 1822
+Received from: FREDDY QUINGAIZA GALLARDO
+Amount: $3.00
+Confirmation: 3470391923
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Wednesday Nov 13 @ 1817
+Received from: Victor Ramirezcapistran
+Amount: $3.00
+Confirmation: 3470380498
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Wednesday Nov 13 @ 1744
+Received from: BRYCE H BOYEA
+Amount: $3.00
+Confirmation: 3470311503
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Monday Nov 11 @ 1824
+Received from: JONATHAN PORTUGUEZ
+Amount: $1.00
+Confirmation: 3465384279
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Monday Nov 11 @ 1818
+Received from: ERIK DIAZ
+Amount: $3.00
+Confirmation: 3465375786
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Monday Nov 11 @ 1808
+Received from: ALEJANDRO BARRANCO GUITRON
+Amount: $3.00
+Confirmation: 3465357869
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Monday Nov 11 @ 1808
+Received from: ELVIS ORTIZ
+Amount: $6.00
+Confirmation: 3465356859
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---
+
+Date: Monday Nov 11 @ 1808
+Received from: Victor Ramirezcapistran
+Amount: $3.00
+Confirmation: 3465349446
+Account: Navy Federal Credit Union, Active Duty Checking, XXXXXX6475
+---

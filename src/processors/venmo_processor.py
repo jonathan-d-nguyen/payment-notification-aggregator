@@ -30,11 +30,11 @@ class VenmoProcessor(EmailProcessor):
         """Process Venmo emails and extract transaction data"""
         email_ids = self.search_emails()
         
-        # Sort email IDs by date (assuming they're sequential)
-        email_ids.sort(reverse=True)
+        # # Sort email IDs by date (assuming they're sequential)
+        # email_ids.sort()
         
         # Get the 10 most recent emails
-        recent_emails = email_ids[:10] if len(email_ids) > 10 else email_ids
+        recent_emails = email_ids[-10:] if len(email_ids) > 10 else email_ids
         transactions = []
 
         with open(self.output_file, "w") as output_file:

@@ -1,0 +1,4 @@
+beautifulsoup4==4.12.3
+python-dotenv==1.0.1
+imaplib3>=1.0.0  # For email processing
+email>=3.0.0     # Part of Python standard library but good to specify

@@ -1,0 +1,47 @@
+Connected to Gmail successfully.
+Date: Wednesday Nov 20 @ 1805
+Transaction: Received from Ethan Phung
+Amount: $3.00
+Note: Soccer
+---
+Date: Wednesday Nov 20 @ 1757
+Transaction: Received from David Tucker
+Amount: $3.00
+Note: ⚽
+---
+Date: Wednesday Nov 20 @ 1749
+Transaction: Received from Jonathan Phan
+Amount: $3.00
+Note: Jonathan p
+---
+Date: Wednesday Nov 20 @ 1733
+Transaction: Received from GP Pickup
+Amount: $3.00
+Note: Meetup ⚽ for Danny. Will be a bit late
+---
+Date: Wednesday Nov 20 @ 1402
+Transaction: Received from Daud Gonzalez
+Amount: $3.00
+Note: Daud gonzalez
+---
+Date: Monday Nov 18 @ 1813
+Transaction: Received from Antonio Rocha
+Amount: $3.00
+Note: Antonio Rocha
+---
+Date: Monday Nov 18 @ 1813
+Transaction: Received from Jonathan Phan
+Amount: $3.00
+Note: Jonathan P
+---
+Skipping non-payment email: Lady Dai is now your friend on Venmo
+Date: Thursday Nov 14 @ 0543
+Transaction: Paid to Lady Dai $1000.00
+Amount: $1000.00
+Note: Vietnam
+---
+Date: Wednesday Nov 13 @ 1816
+Transaction: Received from Antonio Rocha
+Amount: $3.00
+Note: Antonio Rocha
+---
