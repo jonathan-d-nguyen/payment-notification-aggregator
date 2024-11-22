@@ -53,6 +53,9 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#multi-cloud-architecture">Multi-Cloud Architecture</a></li>
+    <li><a href="#implementation-plan">Implementation Plan</a></li>
+    <li><a href="#security-and-compliance">Security and Compliance</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -74,6 +77,8 @@ A serverless solution for automating payment tracking for soccer meetups. The sy
 - **Task Management**: Integration with iOS Reminders for participant check-off
 - **Infrastructure**: Terraform for AWS resource provisioning and management
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Built With
 
 - ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
@@ -92,6 +97,8 @@ A serverless solution for automating payment tracking for soccer meetups. The sy
 - Terraform
 - AWS CLI configured
 - iOS device for Reminders integration
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Installation
 
@@ -144,15 +151,289 @@ In progress:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Multi-Cloud Architecture
+
+### Infrastructure Components
+
+- **Email Ingestion**
+
+  - Primary: AWS SES
+  - Alternatives: Azure Communication Services, GCP Cloud Tasks
+  - Multi-region failover capability
+
+- **Processing Layer**
+
+  - AWS Lambda (primary)
+  - Azure Functions (secondary)
+  - GCP Cloud Functions (tertiary)
+  - Load balancing across cloud providers
+
+- **Storage Strategy**
+
+  - Hot Data: DynamoDB with global tables
+  - Cold Storage: Multi-cloud blob storage (S3/Azure Blob/GCP Storage)
+  - Automated archival policies
+
+- **Event Processing**
+
+  - AWS EventBridge for primary orchestration
+  - Cross-cloud event synchronization
+  - Dead letter queues for failed events
+
+- **Secrets Management**
+  - HashiCorp Vault as central secret store
+  - Cloud KMS integration for key management
+  - Automatic secret rotation
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Key Design Principles
+
+1. **Cloud Agnostic Core**
+
+   - Provider-neutral business logic
+   - Abstracted cloud services
+   - Portable configurations
+
+2. **Event-Driven Architecture**
+
+   - Asynchronous processing
+   - Loose coupling
+   - Scalable message handling
+
+3. **Security-First Approach**
+
+   - Zero-trust architecture
+   - Encryption everywhere
+   - Least privilege access
+
+4. **Comprehensive Monitoring**
+
+   - Cross-cloud metrics aggregation
+   - Centralized logging
+   - Real-time alerting
+
+5. **Cost Optimization**
+   - Dynamic resource allocation
+   - Multi-cloud cost analysis
+   - Automated scaling policies
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Implementation Plan
+
+### 1. Infrastructure Setup
+
+```
+# payment-notification-aggregator/
+├── infrastructure
+│   └── cloudformation
+│       └── templates
+│           └── template.yaml
+├── src
+│   ├── extractors
+│   │   ├── venmo_extractor.py
+│   │   └── zelle_extractor.py
+│   ├── processors
+│   │   ├── email_processor.py
+│   │   ├── venmo_processor.py
+│   │   └── zelle_processor.py
+│   └── utils
+│       └── output_formatter.py
+├── .gitignore
+├── Dockerfile
+├── main.py
+├── main.tf
+├── README.md
+└── requirements.txt
+```
+
+<details>
+<summary>
+Prospective Infrastructure (click to expand)
+</summary>
+
+```
+# payment-notification-aggregator/
+│
+├── terraform/
+│   ├── modules/
+│   │   ├── core/                 # Cloud-agnostic modules
+│   │   │   ├── vault/
+│   │   │   │   ├── main.tf
+│   │   │   │   ├── variables.tf
+│   │   │   │   └── outputs.tf
+│   │   │   └── monitoring/      # Shared monitoring setup
+│   │   │
+│   │   ├── aws/                 # AWS-specific resources
+│   │   │   ├── ses/
+│   │   │   │   ├── main.tf      # Email ingestion setup
+│   │   │   │   ├── variables.tf
+│   │   │   │   └── outputs.tf
+│   │   │   ├── lambda/
+│   │   │   └── dynamodb/
+│   │   │
+│   │   ├── azure/               # Future Azure implementation
+│   │   │   ├── logic_apps/
+│   │   │   ├── functions/
+│   │   │   └── cosmos_db/
+│   │   │
+│   │   └── gcp/                 # Future GCP implementation
+│   │       ├── cloud_functions/
+│   │       ├── pub_sub/
+│   │       └── firestore/
+│   │
+│   └── environments/
+│       ├── dev/
+│       │   ├── main.tf
+│       │   ├── variables.tf
+│       │   ├── outputs.tf
+│       │   └── backend.tf
+│       └── prod/
+└── └── [same as dev]
+│
+├── src/
+│   ├── core/
+│   │   ├── interfaces/
+│   │   │   ├── email_processor.py    # Abstract base classes
+│   │   │   └── storage.py
+│   │   │
+│   │   └── models/
+│   │       ├── transaction.py         # Data models
+│   │       └── reminder.py
+│   │
+│   ├── processors/
+│   │   ├── parsers/
+│   │   │   ├── venmo_parser.py       # Venmo-specific parsing
+│   │   │   └── zelle_parser.py       # Zelle-specific parsing
+│   │   │
+│   │   └── filters/
+│   │       └── incoming_filter.py     # Filter for received money only
+│   │
+│   ├── services/
+│   │   ├── vault_service.py          # HashiCorp Vault integration
+│   │   ├── email_service.py          # Email processing service
+│   │   └── reminder_service.py       # iOS Reminders integration
+│   │
+│   └── utils/
+│       ├── config.py
+│       ├── logging.py
+│       └── error_handling.py
+│
+├── docker/
+│   ├── Dockerfile               # Multi-stage build
+│   ├── docker-compose.yml       # Local development setup
+│   └── vault/
+│       ├── config.hcl          # Vault configuration
+│       └── policies/
+│           └── app-policy.hcl  # Access policies
+│
+├── tests/
+│   ├── unit/
+│   │   ├── test_parsers.py
+│   │   ├── test_filters.py
+│   │   └── test_services.py
+│   │
+│   ├── integration/
+│   │   ├── test_email_flow.py
+│   │   └── test_reminder_creation.py
+│   │
+│   └── fixtures/
+│       ├── sample_emails/      # Test email templates
+│       │   ├── venmo/
+│       │   └── zelle/
+│       └── expected_outputs/   # Expected parsing results
+│
+├── scripts/
+│   ├── deploy.sh              # Deployment automation
+│   ├── vault-setup.sh         # Vault initialization
+│   └── local-setup.sh         # Development environment setup
+│
+├── docs/
+│   ├── architecture.md        # System design documentation
+│   ├── setup.md              # Setup instructions
+│   ├── deployment.md         # Deployment guide
+│   └── cloud-specific/       # Provider-specific details
+│       ├── aws.md
+│       ├── azure.md
+│       └── gcp.md
+│
+├── .github/
+│   └── workflows/
+│       ├── test.yml              # Unit and integration tests
+│       ├── lint.yml              # Code quality checks
+│       └── deploy.yml            # Multi-cloud deployment pipeline
+│
+├── .gitignore
+├── requirements.txt          # Python dependencies
+├── pyproject.toml           # Python project configuration
+└── README.md               # Project overview and quickstart
+```
+
+</details>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### 2. Processing Pipeline
+
+1. **Email Reception**
+
+   - Multi-provider email ingestion
+   - Unified filtering rules
+   - Cross-cloud storage replication
+
+2. **Processing Function**
+
+   - Cloud-agnostic business logic
+   - Cross-cloud message routing
+   - Unified error handling
+
+3. **Data Storage**
+
+   - Multi-region data replication
+   - Cross-cloud backup strategy
+   - Automated data lifecycle
+
+4. **Reminder Integration**
+   - Resilient webhook system
+   - Cross-platform compatibility
+   - Failure recovery mechanism
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Security and Compliance
+
+### Authentication & Authorization
+
+- OAuth/OIDC integration
+- Cross-cloud IAM strategy
+- Zero-trust network design
+
+### Monitoring & Observability
+
+- Unified logging strategy
+- Cross-cloud metrics
+- Centralized alerting
+
+### Error Handling
+
+- Global retry policies
+- Cross-cloud circuit breakers
+- Unified error reporting
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Roadmap
 
 - [x] AWS SES Configuration
 - [x] Python Email Parser Development
-- [ ] DynamoDB Table Creation and Integration
-- [ ] iOS Reminders Integration
-- [ ] Terraform Infrastructure Setup
-- [ ] Monitoring and Alerting
-- [ ] User Interface for Payment Status
+- [ ] Multi-Cloud Infrastructure Setup
+- [ ] Cross-Cloud Event Processing
+- [ ] Global Data Replication
+- [ ] Security Hardening
+- [ ] Monitoring Implementation
+- [ ] Cost Optimization
+- [ ] Compliance Framework
+- [ ] Disaster Recovery Testing
 
 See the [open issues](https://github.com/jonathan-d-nguyen/payment-notification-aggregator/issues) for a full list of proposed features (and known issues).
 
@@ -180,6 +461,8 @@ Jonathan Nguyen - [@twitter_handle](https://twitter.com/twitter_handle) - jonath
 
 Project Link: [https://github.com/jonathan-d-nguyen/payment-notification-aggregator](https://github.com/jonathan-d-nguyen/payment-notification-aggregator)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/jonathan-d-nguyen/payment-notification-aggregator.svg?style=for-the-badge
@@ -193,5 +476,5 @@ Project Link: [https://github.com/jonathan-d-nguyen/payment-notification-aggrega
 [license-shield]: https://img.shields.io/github/license/jonathan-d-nguyen/payment-notification-aggregator.svg?style=for-the-badge
 [license-url]: https://github.com/jonathan-d-nguyen/payment-notification-aggregator/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/JonathanDanhNguyene
+[linkedin-url]: https://linkedin.com/in/JonathanDanhNguyen
 [product-screenshot]: images/screenshot.png
