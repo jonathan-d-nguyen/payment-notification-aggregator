@@ -1,3 +1,24 @@
+# src/processors/email_processor.py
+"""
+Abstract base class for processing payment notification emails from Gmail accounts.
+Provides common email connection handling and defines the interface for email
+processing implementations.
+
+Features:
+- Secure IMAP connection management for Gmail
+- Abstract methods for email searching and processing
+- Automatic connection cleanup
+
+Child classes must implement:
+- search_emails(): Define search criteria for specific payment providers
+- process_emails(): Extract and structure payment data from matching emails
+
+Usage:
+Extend this class to create specific email processors for different payment
+providers (e.g., Venmo, Zelle) while maintaining consistent connection handling
+and interface structure.
+"""
+
 from abc import ABC, abstractmethod
 import imaplib
 import email

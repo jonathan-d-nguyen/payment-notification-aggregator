@@ -1,4 +1,11 @@
 # src/processors/zelle_processor.py
+"""
+Processes Navy Federal Zelle payment notification emails to extract transaction data.
+Searches for recent Zelle payment emails, extracts transaction details, and outputs
+the formatted results to both console and a text file. Handles up to 10 most recent
+transactions and includes payment details with formatted dates.
+"""
+
 from .email_processor import EmailProcessor
 from ..extractors.zelle_extractor import extract_zelle_data
 from ..utils.output_formatter import format_output  # Remove write_transactions_to_file

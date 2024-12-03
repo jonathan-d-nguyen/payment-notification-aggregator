@@ -1,4 +1,13 @@
 # src/extractors/venmo_extractor.py
+"""
+Parses Venmo payment notification emails to extract transaction details.
+Takes HTML content from a Venmo email notification and returns a dictionary containing:
+- actor: The person who sent/received the payment
+- amount: The payment amount
+- note: The payment memo/note (if provided)
+- direction: Whether the payment was incoming or outgoing
+"""
+
 from bs4 import BeautifulSoup
 import re
 from typing import Dict

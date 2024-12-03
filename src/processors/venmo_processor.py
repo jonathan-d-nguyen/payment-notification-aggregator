@@ -1,4 +1,10 @@
 # src/processors/venmo_processor.py
+"""
+Processes Venmo transaction emails from Gmail. Searches for and extracts data from payment 
+notifications (both sent and received), formats the transaction details, and saves them to 
+a file while displaying in console. Handles up to 10 most recent transactions.
+"""
+
 from .email_processor import EmailProcessor
 from ..extractors.venmo_extractor import extract_venmo_data
 from ..utils.output_formatter import format_output

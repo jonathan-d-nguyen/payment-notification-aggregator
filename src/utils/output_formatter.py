@@ -1,4 +1,24 @@
 # src/utils/output_formatter.py
+"""
+Formats payment transaction data into human-readable output strings.
+Takes a transaction dictionary and creates formatted strings for both
+console display and file logging purposes.
+
+Handles both Venmo and Zelle transaction formats, including:
+- Transaction date
+- Sender information
+- Payment amount
+- Payment notes (Venmo)
+- Confirmation numbers (Zelle)
+- Account details (Zelle)
+
+Returns a tuple of two strings:
+1. Console output: Formatted for terminal display
+2. File output: Formatted for log file writing
+
+Each field uses fallback values if data is missing from the transaction.
+"""
+
 from typing import Dict
 
 def format_output(transaction: Dict) -> tuple:

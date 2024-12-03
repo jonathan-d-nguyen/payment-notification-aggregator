@@ -1,3 +1,14 @@
+# src/extractors/zelle_extractor.py
+"""
+Parses Navy Federal Zelle payment notification emails to extract incoming payment details.
+Takes HTML content from a Zelle email notification and returns a dictionary containing:
+- sender: Name of the person who sent the payment
+- amount: Payment amount with dollar sign
+- confirmation: Zelle confirmation number
+- account: Recipient account information
+- direction: Always 'incoming' as this only processes received payments
+"""
+
 from bs4 import BeautifulSoup
 import re
 from typing import Dict
